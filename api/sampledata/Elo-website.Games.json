@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "64df53b8a3cbd11ad6a3b68e"
+  },
+  "id": "124124",
+  "winner": "evil",
+  "player1": "zunga",
+  "player2": "bunga",
+  "player3": "lunga",
+  "player4": "junga",
+  "player5": "funga",
+  "player6": "dunga",
+  "player7": "qunga",
+  "player8": "tunga"
+},
+{
+  "_id": {
+    "$oid": "64df5702a3cbd11ad6a3b699"
+  },
+  "id": "124",
+  "winner": "evil",
+  "player1": "Curly",
+  "player2": "Zalran",
+  "player3": "Sirak",
+  "player4": "Nathan",
+  "player5": "Pume",
+  "player6": "Judy",
+  "player7": "Samchy",
+  "player8": "Capy"
+}]

@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "64df562ea3cbd11ad6a3b690"
+  },
+  "name": "Curly",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df563fa3cbd11ad6a3b691"
+  },
+  "name": "Pume",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df5645a3cbd11ad6a3b692"
+  },
+  "name": "Judy",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df564da3cbd11ad6a3b693"
+  },
+  "name": "Samchy",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df5658a3cbd11ad6a3b694"
+  },
+  "name": "Sirak",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df565da3cbd11ad6a3b695"
+  },
+  "name": "Capy",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df568aa3cbd11ad6a3b696"
+  },
+  "name": "Zalran",
+  "rating": 1000
+},
+{
+  "_id": {
+    "$oid": "64df56b9a3cbd11ad6a3b697"
+  },
+  "name": "Nathan",
+  "rating": 1000
+}]

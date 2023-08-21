@@ -1,0 +1,41 @@
+###
+
+GET http://localhost:3000/api/player/64df56b9a3cbd11ad6a3b697
+
+###
+GET http://localhost:3000/api/player/64df56b9a3cbd11ad6a3b697
+
+###
+
+POST http://localhost:3000/api/add-player 
+content-type: application/json
+
+{
+    "name": "Pume",
+    "rating": "1000"
+}
+
+
+###
+DELETE http://localhost:3000/api/player/64e35bd759adfcd3ba476736
+
+###
+
+PUT http://localhost:3000/api/changeRankings
+content-type: application/json
+
+{
+    "change-in-rating": 25,
+    "losers": [
+        "64df5645a3cbd11ad6a3b692",
+        "64df564da3cbd11ad6a3b693",
+        "64df5658a3cbd11ad6a3b694",
+        "64df565da3cbd11ad6a3b695"
+    ],
+    "winners": [
+        "64df568aa3cbd11ad6a3b696",
+        "64df56b9a3cbd11ad6a3b697",
+        "64e35ddd273b4093ce442eba",
+        "64e35de1273b4093ce442ebc"
+    ]
+}
