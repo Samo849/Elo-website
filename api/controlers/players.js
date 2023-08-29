@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const player = require("../models/player");
+const User = mongoose.model("User");
 const Player = mongoose.model("Player");
 const Game = mongoose.model("Game");
 
@@ -19,13 +19,20 @@ const getPlayer = async (req,res) => {
 
 const addPlayer = async (req, res) => {
     const player = req.body;
+    try {
+        const potential = await Player.findOne({name: player.name})
+        if(potential) {
+            return res.status(400).json({message: `Name ${player.name} is already taken.`})
+        }
+    } catch {
+        return res.status(500).json({message: `Internal server error.`})
+    }
 
     try {
         await Player.create(player);
 
-
         return res.status(200).json({
-            message: "Player successfully created."
+            message: `Player ${player.name} successfully created.`
         });
     } catch (error) {
         return res.status(500).json({
@@ -34,10 +41,27 @@ const addPlayer = async (req, res) => {
     }
 }
 
-const removePlayer = async (req, res) => {
-    const playerId = req.params.id;
+const addUser = async (req, res) => {
+    const user = req.body;
+
     try {
-        await Player.findByIdAndDelete(playerId);
+        await User.create(user);
+
+
+        return res.status(200).json({
+            message: "User successfully created."
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error."
+        })
+    }
+}
+
+const removeUser = async (req, res) => {
+    const UserId = req.params.id;
+    try {
+        await User.findByIdAndDelete(UserId);
         return res.status(200).json({
             message: "User successfully deleted."
         })
@@ -46,50 +70,51 @@ const removePlayer = async (req, res) => {
     }
 }
 
-const changeRankings = async(req,res) => {
-    
+const removePlayer = async (req, res) => {
+    const playerId = req.params.id;
     try {
-        const changeInratings = req.body['change-in-rating'];
-        const losers = req.body['losers'];
-        const winners =req.body['winners'];
-
-        for (let i = 0; i < losers.length; i++) {
-            try {
-                const player = await Player.findById(losers[i]);
-                if (player) {
-                    player.rating -= changeInratings;
-                    await player.save();
-                } else {
-                    console.log(`Player with ID ${losers[i]} not found.`);
-                }
-            } catch (error) {
-                console.error(`Error updating loser: ${error}`);
-            }
-        }
-        
-        for (let i = 0; i < winners.length; i++) {
-            try {
-                const player = await Player.findById(winners[i]);
-                if (player) {
-                    player.rating += changeInratings;
-                    await player.save();
-                } else {
-                    console.log(`Player with ID ${winners[i]} not found.`);
-                }
-            } catch (error) {
-                console.error(`Error updating winner: ${error}`);
-            }
-        }
-
+        await Player.findByIdAndDelete(playerId);
         return res.status(200).json({
-            message: "dela",
-            changeInratings: changeInratings,
-            winners: winners,
-            losers: losers
+            message: "Player successfully deleted."
         })
     } catch(err) {
-        return res.status(500).json({message:"internal"});
+        return res.status(500).json({message:err.message});
     }
+}
+
+const changeRankings = async(changeInratings, losers, winners) => {
+
+
+    for (let i = 0; i < losers.length; i++) {
+        try {
+            const player = await Player.findOne({name: losers[i]});
+            
+            if (player) {
+                player.rating -= changeInratings;
+                await player.save();
+            } else {
+                console.log(`Player with name ${losers[i]} not found.`);
+            }
+        } catch (error) {
+            console.error(`Error updating loser: ${error}`);
+        }
+    }
+
+    for (let i = 0; i < winners.length; i++) {
+        try {
+            const player = await Player.findOne({name: winners[i]});
+            if (player) {
+                player.rating += changeInratings;
+                await player.save();
+            } else {
+                console.log(`Player with name ${winners[i]} not found.`);
+            }
+        } catch (error) {
+            console.error(`Error updating winner: ${error}`);
+        }
+    }
+    return ({})
+    
 }
 
 const getPlayerRating = async(req,res) => { // ?
@@ -106,9 +131,11 @@ const getPlayerRating = async(req,res) => { // ?
 }
 
 module.exports = {
+    addUser,
     getPlayer,
     getPlayerRating,
     addPlayer,
     removePlayer,
+    removeUser,
     changeRankings
 };

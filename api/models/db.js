@@ -40,5 +40,8 @@ process.on("SIGTERM", () => {
 });
 
 
-require("./player");
+
 require("./game");
+
+
+

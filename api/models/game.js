@@ -1,16 +1,37 @@
 const mongoose = require("mongoose");
 
-const game = new mongoose.Schema({
-    player1: { type: String, required: true},
-    player2: { type: String, required: true},
-    player3: { type: String, required: true},
-    player4: { type: String, required: true},
-    player5: { type: String, required: true},
-    player6: { type: String, required: true},
-    player7: { type: String, required: true},
-    player8: { type: String, required: true},
-    winner: {type: String},
-    rankGain: {type: Number}
-})
+const gamescount = new mongoose.Schema({
+    evil: { type: Number, default: 0 },
+    good: { type: Number, default: 0 },
+});
 
-module.export = mongoose.model('Game', game);
+const user = new mongoose.Schema({
+    name: { type: String, required: true },
+    password: { type: String, required: true },
+});
+
+const player = new mongoose.Schema({
+    name: { type: String, required: true },
+    rating: { type: Number, default: 1000 },
+});
+
+const game = new mongoose.Schema({
+    players: { type: [String], required: true },
+    winner: { type: String },
+    creator: { type: String, required: true },
+    rankGainGoodWin: { type: Number , default:15},
+    rankGainEvilWin: { type: Number , default:15},
+    date: {type: Date, default: Date.now}
+});
+
+const Gamescount = mongoose.model('Gamescount', gamescount);
+const User = mongoose.model('User', user);
+const Player = mongoose.model('Player', player);
+const Game = mongoose.model('Game', game);
+
+module.exports = {
+    Gamescount,
+    User,
+    Player,
+    Game
+};
